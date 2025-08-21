@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday!</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe Script', cursive;
+      background: #fdfaf4 url('https://i.ibb.co/gP1vJ4J/scrapbook-bg.jpg') repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .card {
+      width: 90%;
+      max-width: 500px;
+      background: #fffbe9;
+      border: 3px solid #d4a373;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      animation: fadeIn 2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    h1 {
+      color: #d2691e;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #444;
+      font-size: 18px;
+    }
+    .photo {
+      margin: 20px auto;
+      width: 250px;
+      height: 250px;
+      background: url('https://i.ibb.co/4MvyfYq/sample-photo.jpg') center/cover;
+      border: 5px solid #fff;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+      transform: rotate(-3deg);
+    }
+    .decor {
+      position: absolute;
+      width: 60px;
+      animation: float 4s infinite ease-in-out;
+    }
+    .decor.ballon {
+      top: -20px;
+      right: -10px;
+    }
+    .decor.flower {
+      bottom: -10px;
+      left: -10px;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    @keyframes float {
+      0% {transform: translateY(0);}
+      50% {transform: translateY(-15px);}
+      100% {transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="https://i.ibb.co/k5M8MXq/balloon.png" class="decor ballon">
+    <img src="https://i.ibb.co/3FWK2PG/flower.png" class="decor flower">
+
+    <h1>Happy Birthday 🎉</h1>
+    <div class="photo"></div>
+    <p>Selamat ulang tahun, adikku tercinta 💕<br>
+       Semoga selalu bahagia, sehat, dan semua mimpi bisa tercapai ✨</p>
+  </div>
+</body>
+</html>
