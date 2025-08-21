@@ -3,144 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <title>Happy Birthday!</title>
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <style>
     body {
       margin: 0;
-      font-family: 'Brush Script MT', cursive;
-      background: #f3f0e6;
-      background-image: url('https://i.ibb.co/Vvh6cdz/paper-texture.jpg');
-      background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #f7f4ec;
+    }
+
+    .swiper {
+      width: 100%;
       height: 100vh;
     }
 
-    .container {
-      perspective: 1000px;
-    }
-
-    .card {
-      width: 350px;
-      height: 500px;
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 1s;
-      cursor: pointer;
-    }
-
-    .card.is-flipped {
-      transform: rotateY(180deg);
-    }
-
-    .side {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border: 6px solid #d4a373;
-      border-radius: 20px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-      background: #fffdf7;
+    .swiper-slide {
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
+      flex-direction: column;
+      padding: 20px;
+      background: url("https://i.ibb.co/Vvh6cdz/paper-texture.jpg") center/cover;
+      position: relative;
     }
 
-    .front {
+    .scrap-card {
       background: #fffdf7;
+      border: 6px dashed #d4a373;
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+      position: relative;
     }
 
-    .front h1 {
-      font-size: 32px;
-      color: #e85d75;
-      margin-top: 20px;
-    }
-
-    .photo {
+    .scrap-card .photo {
       margin: 20px auto;
-      width: 250px;
-      height: 250px;
-      background: url('https://i.ibb.co/4MvyfYq/sample-photo.jpg') center/cover;
+      width: 260px;
+      height: 260px;
+      background: url("https://i.ibb.co/4MvyfYq/sample-photo.jpg") center/cover;
       border: 8px solid #fff;
       transform: rotate(-3deg);
       box-shadow: 0 5px 12px rgba(0,0,0,0.3);
     }
 
-    .tape {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%) rotate(-5deg);
-      width: 120px;
-      opacity: 0.8;
+    .scrap-card h1, .scrap-card h2 {
+      color: #e85d75;
+      margin: 10px 0;
+    }
+
+    .scrap-card p {
+      font-size: 20px;
+      line-height: 1.5;
+      color: #444;
     }
 
     .decor {
       position: absolute;
-      width: 60px;
+      width: 70px;
       animation: float 6s infinite ease-in-out;
     }
-
-    .ballon { top: -20px; right: -20px; }
+    .balloon { top: -20px; right: -20px; }
     .flower { bottom: -20px; left: -20px; }
-
-    .back {
-      background: #fffbe9;
-      transform: rotateY(180deg);
-      text-align: center;
-      padding: 30px;
-    }
-
-    .back h2 {
-      font-size: 28px;
-      color: #d2691e;
-    }
-
-    .back p {
-      font-size: 18px;
-      color: #444;
-      margin-top: 15px;
-      line-height: 1.5;
-    }
 
     @keyframes float {
       0% { transform: translateY(0); }
       50% { transform: translateY(-15px); }
       100% { transform: translateY(0); }
     }
+
+    /* Swiper navigation dots */
+    .swiper-pagination-bullet {
+      background: #e85d75 !important;
+      opacity: 1;
+    }
+    .swiper-pagination-bullet-active {
+      background: #d2691e !important;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="card" id="card">
-      <!-- Front side -->
-      <div class="side front">
-        <img src="https://i.ibb.co/KLkw5f1/washi-tape.png" class="tape">
-        <img src="https://i.ibb.co/k5M8MXq/balloon.png" class="decor ballon">
-        <img src="https://i.ibb.co/3FWK2PG/flower.png" class="decor flower">
-
-        <div class="photo"></div>
-        <h1>Happy Birthday 🎉</h1>
+  <!-- Swiper container -->
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      
+      <!-- Slide 1 -->
+      <div class="swiper-slide">
+        <div class="scrap-card">
+          <img src="https://i.ibb.co/k5M8MXq/balloon.png" class="decor balloon">
+          <div class="photo"></div>
+          <h1>🎉 Happy Birthday 🎂</h1>
+          <p>Selamat ulang tahun adikku tersayang 🥰<br>
+          Semoga harimu seindah senyummu 🌸</p>
+        </div>
       </div>
 
-      <!-- Back side -->
-      <div class="side back">
-        <h2>Untuk Adikku 💕</h2>
-        <p>Semoga tahun ini penuh kebahagiaan, kesehatan, dan semua impianmu bisa tercapai 🌸<br><br>
-        Love you always 💖</p>
+      <!-- Slide 2 -->
+      <div class="swiper-slide">
+        <div class="scrap-card">
+          <h2>🌈 Memories</h2>
+          <div class="photo" style="background-image: url('https://i.ibb.co/3FWK2PG/flower.png');"></div>
+          <p>Ingat nggak foto ini? 😂<br>
+          Momen-momen kecil yang bikin hidup berwarna 💕</p>
+        </div>
       </div>
+
+      <!-- Slide 3 -->
+      <div class="swiper-slide">
+        <div class="scrap-card">
+          <h2>💌 Pesan Spesial</h2>
+          <p>Kamu bukan cuma adik, tapi juga sahabat terbaik 🌟<br>
+          Terima kasih sudah selalu bikin rumah penuh tawa 😍</p>
+        </div>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="swiper-slide">
+        <div class="scrap-card">
+          <h2>✨ Harapan</h2>
+          <p>Semoga semua impianmu terkabul 💫<br>
+          dan tahun ini jadi awal cerita terbaikmu 📖</p>
+        </div>
+      </div>
+
     </div>
+    <!-- Pagination (bullets) -->
+    <div class="swiper-pagination"></div>
   </div>
 
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
-    const card = document.getElementById('card');
-    card.addEventListener('click', () => {
-      card.classList.toggle('is-flipped');
+    const swiper = new Swiper('.swiper', {
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
     });
   </script>
 </body>
 </html>
+
 
