@@ -1,149 +1,306 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Happy Birthday!</title>
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🎂 Happy Birthday, Adik!</title>
+  <meta name="theme-color" content="#ff7ac6" />
   <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: #f7f4ec;
+    :root{
+      --bg-1:#ff9a9e; /* pink */
+      --bg-2:#fad0c4; /* peach */
+      --bg-3:#fbc2eb; /* lilac */
+      --ink:#222;
+      --muted:#666;
+      --card:#fff;
+      --accent:#ff4fa3;
+      --accent-2:#7c4dff;
+      --radius:22px;
+      --shadow:0 10px 30px rgba(0,0,0,.12);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji;
+      color:var(--ink);
+      background: radial-gradient(1200px 800px at 10% 0%, #ffe6f4 0%, transparent 60%),
+                  radial-gradient(900px 600px at 100% 0%, #e6f3ff 0%, transparent 60%),
+                  linear-gradient(135deg,var(--bg-1),var(--bg-3));
+      background-attachment: fixed;
     }
 
-    .swiper {
-      width: 100%;
-      height: 100vh;
+    /* Sticky header with music control */
+    header{
+      position: sticky;
+      top:0; z-index: 50;
+      backdrop-filter: blur(8px) saturate(1.1);
+      background: linear-gradient(90deg,#ffffffcc,#ffffff88);
+      border-bottom: 1px solid #ffffff66;
+      display:flex; align-items:center; gap:.75rem;
+      padding:.75rem 1rem;
+    }
+    header .title{
+      font-weight:800; letter-spacing:.3px;
+      display:flex; align-items:center; gap:.5rem;
+    }
+    .chip{font-size:.8rem; padding:.25rem .6rem; border-radius:999px; background:#0000000f}
+
+    .controls{margin-left:auto; display:flex; gap:.5rem; align-items:center}
+    .btn{
+      border:0; border-radius:999px; padding:.55rem .9rem; cursor:pointer; font-weight:700;
+      background: linear-gradient(90deg,var(--accent),var(--accent-2)); color:white;
+      box-shadow: var(--shadow);
+      display:inline-flex; gap:.5rem; align-items:center;
+      transition: transform .12s ease;
+    }
+    .btn:active{ transform: scale(.98); }
+    .btn.secondary{
+      background: white; color: var(--ink); border:1px solid #00000012;
     }
 
-    .swiper-slide {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      padding: 20px;
-      background: url("https://i.ibb.co/Vvh6cdz/paper-texture.jpg") center/cover;
-      position: relative;
+    /* Intro hero */
+    .hero{
+      max-width: 980px; margin: 32px auto 16px; padding: 18px; text-align:center;
+    }
+    .hero-card{
+      border-radius: calc(var(--radius) + 6px);
+      padding: 28px 22px; background: #ffffffc7; box-shadow: var(--shadow);
+      border:1px solid #ffffff70;
+    }
+    .hero h1{margin:.2rem 0 0; font-size: clamp(28px,4vw,44px)}
+    .hero p{margin:.4rem 0 0; color:var(--muted);}
+
+    /* Scroll album */
+    .album{
+      height: calc(100vh - 120px);
+      max-height: 800px;
+      max-width: 980px;
+      margin: 8px auto 48px; padding: 0 12px 12px;
+      overflow-y: auto; scroll-snap-type: y mandatory; scroll-behavior: smooth;
+      border-radius: calc(var(--radius) + 10px);
+      background: #ffffffcc; box-shadow: var(--shadow);
+      border:1px solid #ffffff85;
+    }
+    .panel{
+      scroll-snap-align: start; scroll-margin-top: 8px;
+      background: var(--card); border-radius: var(--radius);
+      margin: 12px; padding: 14px; box-shadow: var(--shadow);
+      border:1px dashed #0000001a; position: relative; overflow:hidden;
+    }
+    .panel::after{
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background: linear-gradient(180deg,transparent 60%, #00000008 100%);
     }
 
-    .scrap-card {
-      background: #fffdf7;
-      border: 6px dashed #d4a373;
-      border-radius: 20px;
-      padding: 30px;
-      text-align: center;
-      max-width: 500px;
-      width: 90%;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-      position: relative;
+    .polaroid{
+      background:#fff; border-radius: 16px; padding: 12px 12px 18px; width: min(100%, 680px);
+      margin: 6px auto; box-shadow: 0 12px 30px rgba(0,0,0,.18);
+      transform-style: preserve-3d; perspective: 1000px;
+    }
+    .polaroid img{ width:100%; display:block; border-radius: 12px; object-fit: cover; max-height: 420px }
+    .caption{ text-align:center; font-weight:700; margin-top:10px }
+
+    .tags{ display:flex; gap:.5rem; flex-wrap:wrap; justify-content:center; margin-top:.5rem }
+    .tag{ font-size:.8rem; background:#00000008; padding:.25rem .6rem; border-radius:999px; border:1px solid #00000010 }
+
+    .note{ background: #fff8cc; border:1px solid #00000014; padding:.65rem .8rem; border-radius: 12px; margin-top:8px; font-size:.95rem }
+
+    /* Footer */
+    footer{ text-align:center; padding: 18px; color:#000000aa }
+
+    /* Floating arrows */
+    .scroll-indicator{
+      position: fixed; right: 16px; bottom: 16px; z-index: 40;
+      background:#ffffffd8; border:1px solid #00000012; border-radius: 14px; padding: 10px 12px; box-shadow: var(--shadow);
+      display:flex; gap:10px; align-items:center; font-weight:700;
     }
 
-    .scrap-card .photo {
-      margin: 20px auto;
-      width: 260px;
-      height: 260px;
-      background: url("https://i.ibb.co/4MvyfYq/sample-photo.jpg") center/cover;
-      border: 8px solid #fff;
-      transform: rotate(-3deg);
-      box-shadow: 0 5px 12px rgba(0,0,0,0.3);
-    }
+    /* Confetti canvas */
+    #confetti{ position: fixed; inset:0; pointer-events:none; z-index: 60 }
 
-    .scrap-card h1, .scrap-card h2 {
-      color: #e85d75;
-      margin: 10px 0;
-    }
-
-    .scrap-card p {
-      font-size: 20px;
-      line-height: 1.5;
-      color: #444;
-    }
-
-    .decor {
-      position: absolute;
-      width: 70px;
-      animation: float 6s infinite ease-in-out;
-    }
-    .balloon { top: -20px; right: -20px; }
-    .flower { bottom: -20px; left: -20px; }
-
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-      100% { transform: translateY(0); }
-    }
-
-    /* Swiper navigation dots */
-    .swiper-pagination-bullet {
-      background: #e85d75 !important;
-      opacity: 1;
-    }
-    .swiper-pagination-bullet-active {
-      background: #d2691e !important;
+    @media (max-width: 640px){
+      .hero{ padding: 12px }
+      .album{ height: calc(100vh - 150px) }
     }
   </style>
 </head>
 <body>
-  <!-- Swiper container -->
-  <div class="swiper">
-    <div class="swiper-wrapper">
-      
-      <!-- Slide 1 -->
-      <div class="swiper-slide">
-        <div class="scrap-card">
-          <img src="https://i.ibb.co/k5M8MXq/balloon.png" class="decor balloon">
-          <div class="photo"></div>
-          <h1>🎉 Happy Birthday 🎂</h1>
-          <p>Selamat ulang tahun adikku tersayang 🥰<br>
-          Semoga harimu seindah senyummu 🌸</p>
-        </div>
-      </div>
+  <canvas id="confetti"></canvas>
 
-      <!-- Slide 2 -->
-      <div class="swiper-slide">
-        <div class="scrap-card">
-          <h2>🌈 Memories</h2>
-          <div class="photo" style="background-image: url('https://i.ibb.co/3FWK2PG/flower.png');"></div>
-          <p>Ingat nggak foto ini? 😂<br>
-          Momen-momen kecil yang bikin hidup berwarna 💕</p>
-        </div>
-      </div>
-
-      <!-- Slide 3 -->
-      <div class="swiper-slide">
-        <div class="scrap-card">
-          <h2>💌 Pesan Spesial</h2>
-          <p>Kamu bukan cuma adik, tapi juga sahabat terbaik 🌟<br>
-          Terima kasih sudah selalu bikin rumah penuh tawa 😍</p>
-        </div>
-      </div>
-
-      <!-- Slide 4 -->
-      <div class="swiper-slide">
-        <div class="scrap-card">
-          <h2>✨ Harapan</h2>
-          <p>Semoga semua impianmu terkabul 💫<br>
-          dan tahun ini jadi awal cerita terbaikmu 📖</p>
-        </div>
-      </div>
-
+  <header>
+    <div class="title">🎉 Birthday Album <span class="chip">untuk adik</span></div>
+    <div class="controls">
+      <button class="btn" id="playBtn">▶️ Putar Lagu</button>
+      <button class="btn secondary" id="muteBtn" aria-pressed="false">🔇 Mute</button>
     </div>
-    <!-- Pagination (bullets) -->
-    <div class="swiper-pagination"></div>
-  </div>
+  </header>
 
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <section class="hero">
+    <div class="hero-card">
+      <div style="font-size:24px">🎂✨ Selamat Ulang Tahun, Dik! ✨🎂</div>
+      <h1 id="typewriter" aria-label="Ucapan ulang tahun"></h1>
+      <p>Scroll ke bawah kayak album foto. Ada musiknya juga—klik <b>Putar Lagu</b> ya 💖</p>
+    </div>
+  </section>
+
+  <main class="album" id="album">
+    <!-- TIP: Ganti URL gambar di atribut src (atau pakai file lokal) -->
+
+    <article class="panel">
+      <div class="polaroid" data-tilt>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1520975693416-35a269479413?q=80&w=1600&auto=format&fit=crop" alt="Balon ulang tahun berwarna-warni" />
+        <div class="caption">Level up! 🎈</div>
+        <div class="tags">
+          <span class="tag">🎂 Sweet moments</span>
+          <span class="tag">👑 Princess vibes</span>
+          <span class="tag">💖 Always loved</span>
+        </div>
+      </div>
+      <div class="note">Doa terbaik buatmu: sehat, bahagia, dan mimpi-mimpi yang makin dekat tiap langkahmu ✨</div>
+    </article>
+
+    <article class="panel">
+      <div class="polaroid" data-tilt>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1600&auto=format&fit=crop" alt="Kue ulang tahun dengan lilin" />
+        <div class="caption">Make a wish… 🕯️</div>
+      </div>
+      <div class="note">Semoga tahun ini penuh kesempatan baru. Ingat, keluarga selalu jadi rumahmu 🤍</div>
+    </article>
+
+    <article class="panel">
+      <div class="polaroid" data-tilt>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1521337588082-43c3b3c22117?q=80&w=1600&auto=format&fit=crop" alt="Album kenangan" />
+        <div class="caption">Besties & siblings 📸</div>
+      </div>
+      <div class="note">Terima kasih sudah jadi adik yang lucu, kuat, dan bikin rumah selalu ramai 😄</div>
+    </article>
+
+    <article class="panel">
+      <div class="polaroid" data-tilt>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?q=80&w=1600&auto=format&fit=crop" alt="Langit dan mimpi" />
+        <div class="caption">Chase your dreams 🌈</div>
+      </div>
+      <div class="note">Apapun yang kamu mau capai, kakak dukung total. Let’s go, superstar! ⭐</div>
+    </article>
+
+    <article class="panel">
+      <div class="polaroid" data-tilt>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1520975605206-16f66a4e1fb3?q=80&w=1600&auto=format&fit=crop" alt="Hadiah dengan pita" />
+        <div class="caption">A small gift inside 🎁</div>
+      </div>
+      <div class="note">Buka halaman ini di HP, tap tombol Play, dan goyang bareng lagunya 🪩</div>
+    </article>
+
+    <article class="panel">
+      <div class="polaroid" data-tilt>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1514517220031-ce63e0b71a23?q=80&w=1600&auto=format&fit=crop" alt="Kembang api" />
+        <div class="caption">We love you! 🫶</div>
+      </div>
+      <div class="note">— Dari kakakmu yang paling heboh 💓</div>
+    </article>
+  </main>
+
+  <footer>
+    Dibuat dengan 💗. Ganti foto & lagu sesuai selera.
+  </footer>
+
+  <!-- Audio: ganti src ke file kamu sendiri (mp3/m4a/ogg). Browser butuh aksi pengguna utk mulai memutar -->
+  <audio id="bgm" preload="auto" src=""></audio>
+
+  <div class="scroll-indicator" id="scrollHint">⬇️ Scroll</div>
+
   <script>
-    const swiper = new Swiper('.swiper', {
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
+    // ===== Typewriter greeting =====
+    const message = "Selamat ulang tahun, adikku sayang! Semoga sehat, bahagia, dan semua doa terbaik terkabul 💖";
+    const tw = document.getElementById('typewriter');
+    let i = 0; function type(){ if(i<=message.length){ tw.textContent = message.slice(0,i++); setTimeout(type, 28); } }
+    type();
+
+    // ===== Tilt effect on polaroids (vanilla) =====
+    document.querySelectorAll('[data-tilt]').forEach(card=>{
+      const strength = 10; // deg
+      card.addEventListener('mousemove', (e)=>{
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width; // 0..1
+        const y = (e.clientY - r.top) / r.height; // 0..1
+        const rx = (0.5 - y) * strength;
+        const ry = (x - 0.5) * strength;
+        card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+      });
+      card.addEventListener('mouseleave', ()=>{ card.style.transform = 'rotateX(0) rotateY(0)'; });
     });
+
+    // ===== Scroll hint visibility =====
+    const album = document.getElementById('album');
+    const hint = document.getElementById('scrollHint');
+    const updateHint = ()=>{ hint.style.opacity = album.scrollTop < 40 ? 1 : 0; };
+    album.addEventListener('scroll', updateHint); updateHint();
+
+    // ===== Simple confetti =====
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    let W = canvas.width = innerWidth, H = canvas.height = innerHeight;
+    addEventListener('resize', ()=>{ W = canvas.width = innerWidth; H = canvas.height = innerHeight; });
+    const pieces = Array.from({length: 140}, ()=>({
+      x: Math.random()*W,
+      y: -Math.random()*H,
+      r: Math.random()*6+2,
+      vy: Math.random()*2+1,
+      vx: (Math.random()-.5)*1.2,
+      rot: Math.random()*Math.PI,
+      vr: (Math.random()-.5)*0.2
+    }));
+    function confettiStep(){
+      ctx.clearRect(0,0,W,H);
+      pieces.forEach(p=>{
+        p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr;
+        if(p.y>H+20){ p.y = -20; p.x = Math.random()*W; }
+        ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+        ctx.fillStyle = `hsl(${(p.y/3)%360},100%,60%)`;
+        ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r);
+        ctx.restore();
+      });
+      requestAnimationFrame(confettiStep);
+    }
+
+    // ===== Audio controls =====
+    const audio = document.getElementById('bgm');
+    const playBtn = document.getElementById('playBtn');
+    const muteBtn = document.getElementById('muteBtn');
+
+    // Set your song file here (local or URL):
+    // Example: audio.src = 'lagu-adik.mp3';
+
+    let started = false;
+    playBtn.addEventListener('click', async ()=>{
+      try{
+        if(!audio.src){
+          alert('Belum ada file lagu. Edit kode dan isi src audio dengan file kamu ya.');
+          return;
+        }
+        if(audio.paused){ await audio.play(); playBtn.textContent='⏸️ Jeda'; if(!started){ started=true; confettiStep(); } }
+        else{ audio.pause(); playBtn.textContent='▶️ Putar Lagu'; }
+      }catch(err){ console.log(err); alert('Browser menolak autoplay. Coba klik lagi setelah interaksi.'); }
+    });
+
+    muteBtn.addEventListener('click', ()=>{
+      audio.muted = !audio.muted; muteBtn.setAttribute('aria-pressed', audio.muted);
+      muteBtn.textContent = audio.muted ? '🔊 Unmute' : '🔇 Mute';
+    });
+
+    // Loop music gently
+    audio.addEventListener('ended', ()=>{ audio.currentTime = 0; audio.play().catch(()=>{}); });
+
+    // ===== Share (optional) =====
+    if(navigator.share){
+      const shareBtn = document.createElement('button');
+      shareBtn.className='btn secondary'; shareBtn.textContent='🔗 Bagikan';
+      shareBtn.addEventListener('click', ()=>{
+        navigator.share({ title:'Birthday Album', text:'Lihat album ulang tahun untuk adikku', url: location.href });
+      });
+      document.querySelector('.controls').appendChild(shareBtn);
+    }
   </script>
 </body>
 </html>
-
-
