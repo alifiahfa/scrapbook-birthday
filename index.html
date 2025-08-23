@@ -1,114 +1,152 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Birthday Shorts-Style Album</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday 🎉</title>
   <style>
-    :root {
-      --bg: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
-      --text: #fff;
-      --shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-    }
-    * {box-sizing: border-box; margin:0; padding:0;}
     body {
-      height:100vh; display:flex;
-      justify-content:center; align-items:center;
-      background: var(--bg);
-      font-family: 'Poppins', sans-serif;
-      color: var(--text);
-      overflow:hidden;
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(to bottom, #fcefee, #fff5f7);
+      color: #333;
+      overflow-x: hidden;
     }
-    .carousel {
+
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    header h1 {
+      font-size: 2em;
+      color: #ff69b4;
+      margin-bottom: 10px;
+      animation: fadeInDown 1.5s ease;
+    }
+
+    header p {
+      font-size: 1.2em;
+      color: #555;
+    }
+
+    .album {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      padding: 20px;
+    }
+
+    .photo-card {
       position: relative;
-      width: 360px; height: 640px;
-      border-radius: 24px;
+      width: 80%;
+      max-width: 320px;
+      aspect-ratio: 3/4;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: var(--shadow);
-      background: rgba(0,0,0,0.3);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      animation: float 4s ease-in-out infinite;
     }
-    .slides {
-      display: flex; width: 400%;
+
+    .photo-card img {
+      width: 100%;
       height: 100%;
-      animation: swipe 16s infinite;
+      object-fit: cover;
+      transition: transform 1s ease;
     }
-    .slide {
-      flex: 1; position: relative;
-      display:flex; justify-content:center; align-items:center;
-      background-size: cover; background-position: center;
+
+    .photo-card:hover img {
+      transform: scale(1.1);
     }
-    .slide::after {
-      content: '';
-      position:absolute; inset:0;
-      background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%);
-    }
+
     .caption {
-      position:absolute; bottom: 16%;
-      text-align:center; width: 80%;
-      font-size: 1.6rem; font-weight:600;
-      line-height:1.2;
-      animation: fade-in 2s ease both;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      padding: 12px;
+      background: rgba(255, 182, 193, 0.6);
+      color: white;
+      font-weight: bold;
+      font-size: 1em;
     }
-    @keyframes swipe {
-      0%, 20% {transform: translateX(0%);}
-      25%,45% {transform: translateX(-100%);}
-      50%,70% {transform: translateX(-200%);}
-      75%,95% {transform: translateX(-300%);}
-      100% {transform: translateX(0%);}
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
     }
-    @keyframes fade-in {
-      from {opacity:0; transform: translateY(20px);}
-      to {opacity:1; transform: translateY(0);}
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .controls {
-      position:absolute; top:8px; right:8px;
-      display:flex; gap:8px;
+
+    /* Tombol musik */
+    .music-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
     }
-    .btn {
-      background: rgba(255,255,255,0.3);
-      border:none; padding:8px;
-      font-size:1.2rem; border-radius:50%;
-      color:white; cursor:pointer;
-      backdrop-filter: blur(4px);
+
+    .music-btn:hover {
+      transform: scale(1.1) rotate(10deg);
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>🎂 Happy Birthday, Sis! 🎉</h1>
+    <p>Semoga harimu penuh kebahagiaan 💖</p>
+  </header>
 
-<div class="carousel">
-  <div class="slides">
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1520975693416-35a269479413?q=80')">
-      <div class="caption">Level up! 🎈</div>
+  <div class="album">
+    <div class="photo-card">
+      <img src="https://source.unsplash.com/300x400/?birthday,cake" alt="cake">
+      <div class="caption">Sweet Moments 🍰</div>
     </div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80')">
-      <div class="caption">Make a wish… 🕯️</div>
+    <div class="photo-card">
+      <img src="https://source.unsplash.com/300x400/?flowers,beautiful" alt="flowers">
+      <div class="caption">For You 🌸</div>
     </div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1521337588082-43c3b3c22117?q=80')">
-      <div class="caption">Besties & siblings 📸</div>
-    </div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?q=80')">
-      <div class="caption">Chase your dreams 🌈</div>
+    <div class="photo-card">
+      <img src="https://source.unsplash.com/300x400/?friends,happy" alt="friends">
+      <div class="caption">Always Together 💕</div>
     </div>
   </div>
-  <div class="controls">
-    <button class="btn" id="play">▶️</button>
-    <button class="btn" id="mute">🔇</button>
-  </div>
-</div>
 
-<audio id="bgm" src="your-song.mp3" loop></audio>
+  <!-- Musik -->
+  <audio id="bg-music" loop>
+    <source src="your-song.mp3" type="audio/mpeg">
+  </audio>
 
-<script>
-  const audio = document.getElementById('bgm');
-  document.getElementById('play').onclick = () => {
-    if(audio.paused) { audio.play().catch(()=>{}); event.target.textContent='⏸️'; }
-    else { audio.pause(); event.target.textContent='▶️'; }
-  };
-  document.getElementById('mute').onclick = () => {
-    audio.muted = !audio.muted;
-    event.target.textContent = audio.muted ? '🔊' : '🔇';
-  };
-</script>
+  <button class="music-btn" onclick="toggleMusic()">🎵</button>
 
+  <script>
+    const music = document.getElementById('bg-music');
+    let playing = false;
+
+    function toggleMusic() {
+      if (playing) {
+        music.pause();
+      } else {
+        music.play();
+      }
+      playing = !playing;
+    }
+  </script>
 </body>
 </html>
