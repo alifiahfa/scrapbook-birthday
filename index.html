@@ -17,25 +17,15 @@
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
       border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-      transform: translateY(0);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
       transition: transform 0.5s ease;
     }
     .birthday-card:hover { transform: translateY(-5px); }
-    .photo-container { perspective: 1000px; }
     .photo-frame {
       border: 8px solid #fff;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-      border-radius: 15px;
-      overflow: hidden;
-      transform-style: preserve-3d;
-      transition: all 0.5s ease;
+      border-radius: 15px; overflow: hidden;
       animation: float 6s ease-in-out infinite;
-    }
-    .photo-frame:hover {
-      transform: rotateY(15deg) rotateX(10deg) scale(1.08);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-      z-index: 10;
     }
     @keyframes float {
       0%,100% { transform: translateY(0) rotate(0deg); }
@@ -52,26 +42,9 @@
       0%,100% { transform: scale(1); opacity: 1; }
       50% { transform: scale(1.1); opacity: 0.8; }
     }
-    .heart { color: #FF6B6B; animation: heartbeat 1.5s infinite; }
-    @keyframes heartbeat { 0%{transform:scale(1);}50%{transform:scale(1.15);}100%{transform:scale(1);} }
-    .title-glow { text-shadow: 0 0 15px rgba(255,154,61,0.7); }
-    .story-lyrics-container {
-      position: relative; min-height: 200px;
-      background: rgba(0,0,0,0.7);
-      border-radius: 20px; padding: 30px 20px; margin: 20px 0;
-      display: flex; align-items: center; justify-content: center; overflow: hidden;
-    }
-    .lyric-display {
-      font-size: 1.5rem; font-weight: 600; color: white;
-      text-align: center; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-      min-height: 120px; display:flex; align-items:center; justify-content:center;
-    }
-    .lyric-line.active { opacity:1; transform:translateY(0); }
-    .typing-cursor {
-      display:inline-block; width:2px; height:1.2em; background:white;
-      margin-left:2px; animation: blink 0.7s infinite;
-    }
-    @keyframes blink { 0%,100%{opacity:1;}50%{opacity:0;} }
+    .heart { color:#FF6B6B; animation: heartbeat 1.5s infinite; }
+    @keyframes heartbeat {0%{transform:scale(1);}50%{transform:scale(1.15);}100%{transform:scale(1);} }
+    .title-glow { text-shadow:0 0 15px rgba(255,154,61,0.7); }
   </style>
 </head>
 <body class="flex items-center justify-center min-h-screen">
@@ -90,7 +63,7 @@
       <h2 class="text-2xl font-semibold text-orange-500 mb-4 text-center">
         <i class="fas fa-images mr-2"></i>Album Kenangan Indah
       </h2>
-      <div class="grid grid-cols-2 gap-4 photo-container">
+      <div class="grid grid-cols-2 gap-4">
         <div class="photo-frame"><img src="https://picsum.photos/200/200?1" class="w-full h-48 object-cover"></div>
         <div class="photo-frame"><img src="https://picsum.photos/200/200?2" class="w-full h-48 object-cover"></div>
         <div class="photo-frame"><img src="https://picsum.photos/200/200?3" class="w-full h-48 object-cover"></div>
@@ -107,9 +80,8 @@
           <p class="text-sm opacity-90">Sedang diputar...</p>
         </div>
       </div>
-      <!-- YouTube Player -->
       <iframe id="youtubePlayer"
-        src="https://youtu.be/maEVfpxDB8k?si=piKTbREGfUGX3Oj_"
+        src="https://www.youtube.com/embed/maEVfpxDB8k?start=0&autoplay=1&mute=1&enablejsapi=1"
         title="YouTube video player"
         frameborder="0"
         class="w-full mt-3 rounded-xl"
@@ -120,26 +92,33 @@
       </button>
     </div>
 
-    <!-- Lirik -->
-    <div class="story-lyrics-container">
-      <div class="lyric-display" id="lyricDisplay">
-        <div class="lyric-line active" id="currentLyric">
-          Your little hand's wrapped around my finger<span class="typing-cursor"></span>
-        </div>
+    <!-- Pesan Spesial -->
+    <div class="bg-yellow-50 p-6 rounded-xl border-l-4 border-orange-400 mb-6 shadow-md">
+      <h2 class="text-2xl font-bold text-orange-600 mb-3">
+        <i class="fas fa-quote-left mr-2"></i> Pesan Spesial
+      </h2>
+      <p class="text-gray-700 leading-relaxed text-justify">
+        Selamat ulang tahun yaa! 🎂 Seperti lirik lagu ini, aku harap kamu selalu tetap menjadi pribadi yang ceria dan penuh semangat. Jangan pernah berhenti bermimpi dan teruslah tumbuh menjadi seseorang yang membanggakan.
+      </p>
+      <p class="text-gray-700 leading-relaxed text-justify">
+        Meski waktu terus berjalan, jangan lupa untuk selalu menikmati setiap momen indah dalam hidupmu! Terima kasih karena selalu ada, selalu perhatian, dan nggak pernah pelit untuk berbagi kebahagiaan. Semoga kebahagiaan yang kamu kasih ke orang lain juga kembali berlipat-lipat untukmu.
+      </p>
+      <p class="text-gray-700 leading-relaxed text-justify">
+        Barakallahu fi umrik. Semoga Allah selalu melimpahkan keberkahan pada umurmu, memberi kesehatan, rezeki yang halal, hati yang lapang, serta langkah yang selalu dimudahkan menuju kebaikan. Semoga setiap impianmu digenggam dengan penuh ridha Allah.
+      </p>
+      <div class="mt-4 text-right">
+        <p class="text-orange-600 font-semibold">Dengan kasih sayang,</p>
+        <p class="text-gray-600">your sister❤️</p>
       </div>
     </div>
 
-    <!-- Pesan -->
-    <div class="bg-yellow-50 p-6 rounded-xl border-l-4 border-orange-400 mb-6 shadow-md">
-      <h2 class="text-2xl font-bold text-orange-600 mb-3">
-        <i class="fas fa-quote-left mr-2"></i>Pesan Spesial
-      </h2>
-      <p class="text-gray-700 leading-relaxed text-justify">
-        Selamat ulang tahun yaa! 🎂 Semoga selalu ceria dan penuh semangat...
-      </p>
-      <div class="mt-4 text-right">
-        <p class="text-orange-600 font-semibold">your sister,</p>
-        <p class="text-gray-600">❤️</p>
+    <!-- Celebration -->
+    <div class="bg-orange-100 p-4 rounded-xl text-center shadow-inner">
+      <h3 class="text-lg font-semibold text-orange-700 mb-2">
+        <i class="fas fa-calendar-alt mr-2"></i>Hari Spesial di Bulan Agustus!
+      </h3>
+      <div class="text-3xl font-bold text-orange-600 animate-pulse">
+        🎉 HAPPY BIRTHDAY! 🎉
       </div>
     </div>
   </div>
@@ -149,21 +128,6 @@
       const iframe = document.getElementById("youtubePlayer");
       iframe.src = iframe.src.replace("mute=1", "mute=0");
     }
-
-    // Ganti lirik otomatis (contoh sederhana)
-    const lyrics = [
-      "Your little hand's wrapped around my finger",
-      "And it's so quiet in the world tonight",
-      "Your little eyelids flutter 'cause you're dreaming",
-      "So I tuck you in, turn on your favorite night light"
-    ];
-    let idx = 0;
-    function showLyric() {
-      const lyricDisplay = document.getElementById("currentLyric");
-      lyricDisplay.innerHTML = lyrics[idx] + '<span class="typing-cursor"></span>';
-      idx = (idx + 1) % lyrics.length;
-    }
-    setInterval(showLyric, 4000);
   </script>
 </body>
 </html>
