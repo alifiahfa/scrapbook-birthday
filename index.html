@@ -1,306 +1,114 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>🎂 Happy Birthday, Adik!</title>
-  <meta name="theme-color" content="#ff7ac6" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Birthday Shorts-Style Album</title>
   <style>
-    :root{
-      --bg-1:#ff9a9e; /* pink */
-      --bg-2:#fad0c4; /* peach */
-      --bg-3:#fbc2eb; /* lilac */
-      --ink:#222;
-      --muted:#666;
-      --card:#fff;
-      --accent:#ff4fa3;
-      --accent-2:#7c4dff;
-      --radius:22px;
-      --shadow:0 10px 30px rgba(0,0,0,.12);
+    :root {
+      --bg: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+      --text: #fff;
+      --shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji;
-      color:var(--ink);
-      background: radial-gradient(1200px 800px at 10% 0%, #ffe6f4 0%, transparent 60%),
-                  radial-gradient(900px 600px at 100% 0%, #e6f3ff 0%, transparent 60%),
-                  linear-gradient(135deg,var(--bg-1),var(--bg-3));
-      background-attachment: fixed;
+    * {box-sizing: border-box; margin:0; padding:0;}
+    body {
+      height:100vh; display:flex;
+      justify-content:center; align-items:center;
+      background: var(--bg);
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      overflow:hidden;
     }
-
-    /* Sticky header with music control */
-    header{
-      position: sticky;
-      top:0; z-index: 50;
-      backdrop-filter: blur(8px) saturate(1.1);
-      background: linear-gradient(90deg,#ffffffcc,#ffffff88);
-      border-bottom: 1px solid #ffffff66;
-      display:flex; align-items:center; gap:.75rem;
-      padding:.75rem 1rem;
-    }
-    header .title{
-      font-weight:800; letter-spacing:.3px;
-      display:flex; align-items:center; gap:.5rem;
-    }
-    .chip{font-size:.8rem; padding:.25rem .6rem; border-radius:999px; background:#0000000f}
-
-    .controls{margin-left:auto; display:flex; gap:.5rem; align-items:center}
-    .btn{
-      border:0; border-radius:999px; padding:.55rem .9rem; cursor:pointer; font-weight:700;
-      background: linear-gradient(90deg,var(--accent),var(--accent-2)); color:white;
+    .carousel {
+      position: relative;
+      width: 360px; height: 640px;
+      border-radius: 24px;
+      overflow: hidden;
       box-shadow: var(--shadow);
-      display:inline-flex; gap:.5rem; align-items:center;
-      transition: transform .12s ease;
+      background: rgba(0,0,0,0.3);
     }
-    .btn:active{ transform: scale(.98); }
-    .btn.secondary{
-      background: white; color: var(--ink); border:1px solid #00000012;
+    .slides {
+      display: flex; width: 400%;
+      height: 100%;
+      animation: swipe 16s infinite;
     }
-
-    /* Intro hero */
-    .hero{
-      max-width: 980px; margin: 32px auto 16px; padding: 18px; text-align:center;
+    .slide {
+      flex: 1; position: relative;
+      display:flex; justify-content:center; align-items:center;
+      background-size: cover; background-position: center;
     }
-    .hero-card{
-      border-radius: calc(var(--radius) + 6px);
-      padding: 28px 22px; background: #ffffffc7; box-shadow: var(--shadow);
-      border:1px solid #ffffff70;
+    .slide::after {
+      content: '';
+      position:absolute; inset:0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%);
     }
-    .hero h1{margin:.2rem 0 0; font-size: clamp(28px,4vw,44px)}
-    .hero p{margin:.4rem 0 0; color:var(--muted);}
-
-    /* Scroll album */
-    .album{
-      height: calc(100vh - 120px);
-      max-height: 800px;
-      max-width: 980px;
-      margin: 8px auto 48px; padding: 0 12px 12px;
-      overflow-y: auto; scroll-snap-type: y mandatory; scroll-behavior: smooth;
-      border-radius: calc(var(--radius) + 10px);
-      background: #ffffffcc; box-shadow: var(--shadow);
-      border:1px solid #ffffff85;
+    .caption {
+      position:absolute; bottom: 16%;
+      text-align:center; width: 80%;
+      font-size: 1.6rem; font-weight:600;
+      line-height:1.2;
+      animation: fade-in 2s ease both;
     }
-    .panel{
-      scroll-snap-align: start; scroll-margin-top: 8px;
-      background: var(--card); border-radius: var(--radius);
-      margin: 12px; padding: 14px; box-shadow: var(--shadow);
-      border:1px dashed #0000001a; position: relative; overflow:hidden;
+    @keyframes swipe {
+      0%, 20% {transform: translateX(0%);}
+      25%,45% {transform: translateX(-100%);}
+      50%,70% {transform: translateX(-200%);}
+      75%,95% {transform: translateX(-300%);}
+      100% {transform: translateX(0%);}
     }
-    .panel::after{
-      content:""; position:absolute; inset:0; pointer-events:none;
-      background: linear-gradient(180deg,transparent 60%, #00000008 100%);
+    @keyframes fade-in {
+      from {opacity:0; transform: translateY(20px);}
+      to {opacity:1; transform: translateY(0);}
     }
-
-    .polaroid{
-      background:#fff; border-radius: 16px; padding: 12px 12px 18px; width: min(100%, 680px);
-      margin: 6px auto; box-shadow: 0 12px 30px rgba(0,0,0,.18);
-      transform-style: preserve-3d; perspective: 1000px;
+    .controls {
+      position:absolute; top:8px; right:8px;
+      display:flex; gap:8px;
     }
-    .polaroid img{ width:100%; display:block; border-radius: 12px; object-fit: cover; max-height: 420px }
-    .caption{ text-align:center; font-weight:700; margin-top:10px }
-
-    .tags{ display:flex; gap:.5rem; flex-wrap:wrap; justify-content:center; margin-top:.5rem }
-    .tag{ font-size:.8rem; background:#00000008; padding:.25rem .6rem; border-radius:999px; border:1px solid #00000010 }
-
-    .note{ background: #fff8cc; border:1px solid #00000014; padding:.65rem .8rem; border-radius: 12px; margin-top:8px; font-size:.95rem }
-
-    /* Footer */
-    footer{ text-align:center; padding: 18px; color:#000000aa }
-
-    /* Floating arrows */
-    .scroll-indicator{
-      position: fixed; right: 16px; bottom: 16px; z-index: 40;
-      background:#ffffffd8; border:1px solid #00000012; border-radius: 14px; padding: 10px 12px; box-shadow: var(--shadow);
-      display:flex; gap:10px; align-items:center; font-weight:700;
-    }
-
-    /* Confetti canvas */
-    #confetti{ position: fixed; inset:0; pointer-events:none; z-index: 60 }
-
-    @media (max-width: 640px){
-      .hero{ padding: 12px }
-      .album{ height: calc(100vh - 150px) }
+    .btn {
+      background: rgba(255,255,255,0.3);
+      border:none; padding:8px;
+      font-size:1.2rem; border-radius:50%;
+      color:white; cursor:pointer;
+      backdrop-filter: blur(4px);
     }
   </style>
 </head>
 <body>
-  <canvas id="confetti"></canvas>
 
-  <header>
-    <div class="title">🎉 Birthday Album <span class="chip">untuk adik</span></div>
-    <div class="controls">
-      <button class="btn" id="playBtn">▶️ Putar Lagu</button>
-      <button class="btn secondary" id="muteBtn" aria-pressed="false">🔇 Mute</button>
+<div class="carousel">
+  <div class="slides">
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1520975693416-35a269479413?q=80')">
+      <div class="caption">Level up! 🎈</div>
     </div>
-  </header>
-
-  <section class="hero">
-    <div class="hero-card">
-      <div style="font-size:24px">🎂✨ Selamat Ulang Tahun, Dik! ✨🎂</div>
-      <h1 id="typewriter" aria-label="Ucapan ulang tahun"></h1>
-      <p>Scroll ke bawah kayak album foto. Ada musiknya juga—klik <b>Putar Lagu</b> ya 💖</p>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80')">
+      <div class="caption">Make a wish… 🕯️</div>
     </div>
-  </section>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1521337588082-43c3b3c22117?q=80')">
+      <div class="caption">Besties & siblings 📸</div>
+    </div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?q=80')">
+      <div class="caption">Chase your dreams 🌈</div>
+    </div>
+  </div>
+  <div class="controls">
+    <button class="btn" id="play">▶️</button>
+    <button class="btn" id="mute">🔇</button>
+  </div>
+</div>
 
-  <main class="album" id="album">
-    <!-- TIP: Ganti URL gambar di atribut src (atau pakai file lokal) -->
+<audio id="bgm" src="your-song.mp3" loop></audio>
 
-    <article class="panel">
-      <div class="polaroid" data-tilt>
-        <img loading="lazy" src="https://images.unsplash.com/photo-1520975693416-35a269479413?q=80&w=1600&auto=format&fit=crop" alt="Balon ulang tahun berwarna-warni" />
-        <div class="caption">Level up! 🎈</div>
-        <div class="tags">
-          <span class="tag">🎂 Sweet moments</span>
-          <span class="tag">👑 Princess vibes</span>
-          <span class="tag">💖 Always loved</span>
-        </div>
-      </div>
-      <div class="note">Doa terbaik buatmu: sehat, bahagia, dan mimpi-mimpi yang makin dekat tiap langkahmu ✨</div>
-    </article>
+<script>
+  const audio = document.getElementById('bgm');
+  document.getElementById('play').onclick = () => {
+    if(audio.paused) { audio.play().catch(()=>{}); event.target.textContent='⏸️'; }
+    else { audio.pause(); event.target.textContent='▶️'; }
+  };
+  document.getElementById('mute').onclick = () => {
+    audio.muted = !audio.muted;
+    event.target.textContent = audio.muted ? '🔊' : '🔇';
+  };
+</script>
 
-    <article class="panel">
-      <div class="polaroid" data-tilt>
-        <img loading="lazy" src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1600&auto=format&fit=crop" alt="Kue ulang tahun dengan lilin" />
-        <div class="caption">Make a wish… 🕯️</div>
-      </div>
-      <div class="note">Semoga tahun ini penuh kesempatan baru. Ingat, keluarga selalu jadi rumahmu 🤍</div>
-    </article>
-
-    <article class="panel">
-      <div class="polaroid" data-tilt>
-        <img loading="lazy" src="https://images.unsplash.com/photo-1521337588082-43c3b3c22117?q=80&w=1600&auto=format&fit=crop" alt="Album kenangan" />
-        <div class="caption">Besties & siblings 📸</div>
-      </div>
-      <div class="note">Terima kasih sudah jadi adik yang lucu, kuat, dan bikin rumah selalu ramai 😄</div>
-    </article>
-
-    <article class="panel">
-      <div class="polaroid" data-tilt>
-        <img loading="lazy" src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?q=80&w=1600&auto=format&fit=crop" alt="Langit dan mimpi" />
-        <div class="caption">Chase your dreams 🌈</div>
-      </div>
-      <div class="note">Apapun yang kamu mau capai, kakak dukung total. Let’s go, superstar! ⭐</div>
-    </article>
-
-    <article class="panel">
-      <div class="polaroid" data-tilt>
-        <img loading="lazy" src="https://images.unsplash.com/photo-1520975605206-16f66a4e1fb3?q=80&w=1600&auto=format&fit=crop" alt="Hadiah dengan pita" />
-        <div class="caption">A small gift inside 🎁</div>
-      </div>
-      <div class="note">Buka halaman ini di HP, tap tombol Play, dan goyang bareng lagunya 🪩</div>
-    </article>
-
-    <article class="panel">
-      <div class="polaroid" data-tilt>
-        <img loading="lazy" src="https://images.unsplash.com/photo-1514517220031-ce63e0b71a23?q=80&w=1600&auto=format&fit=crop" alt="Kembang api" />
-        <div class="caption">We love you! 🫶</div>
-      </div>
-      <div class="note">— Dari kakakmu yang paling heboh 💓</div>
-    </article>
-  </main>
-
-  <footer>
-    Dibuat dengan 💗. Ganti foto & lagu sesuai selera.
-  </footer>
-
-  <!-- Audio: ganti src ke file kamu sendiri (mp3/m4a/ogg). Browser butuh aksi pengguna utk mulai memutar -->
-  <audio id="bgm" preload="auto" src=""></audio>
-
-  <div class="scroll-indicator" id="scrollHint">⬇️ Scroll</div>
-
-  <script>
-    // ===== Typewriter greeting =====
-    const message = "Selamat ulang tahun, adikku sayang! Semoga sehat, bahagia, dan semua doa terbaik terkabul 💖";
-    const tw = document.getElementById('typewriter');
-    let i = 0; function type(){ if(i<=message.length){ tw.textContent = message.slice(0,i++); setTimeout(type, 28); } }
-    type();
-
-    // ===== Tilt effect on polaroids (vanilla) =====
-    document.querySelectorAll('[data-tilt]').forEach(card=>{
-      const strength = 10; // deg
-      card.addEventListener('mousemove', (e)=>{
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width; // 0..1
-        const y = (e.clientY - r.top) / r.height; // 0..1
-        const rx = (0.5 - y) * strength;
-        const ry = (x - 0.5) * strength;
-        card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
-      });
-      card.addEventListener('mouseleave', ()=>{ card.style.transform = 'rotateX(0) rotateY(0)'; });
-    });
-
-    // ===== Scroll hint visibility =====
-    const album = document.getElementById('album');
-    const hint = document.getElementById('scrollHint');
-    const updateHint = ()=>{ hint.style.opacity = album.scrollTop < 40 ? 1 : 0; };
-    album.addEventListener('scroll', updateHint); updateHint();
-
-    // ===== Simple confetti =====
-    const canvas = document.getElementById('confetti');
-    const ctx = canvas.getContext('2d');
-    let W = canvas.width = innerWidth, H = canvas.height = innerHeight;
-    addEventListener('resize', ()=>{ W = canvas.width = innerWidth; H = canvas.height = innerHeight; });
-    const pieces = Array.from({length: 140}, ()=>({
-      x: Math.random()*W,
-      y: -Math.random()*H,
-      r: Math.random()*6+2,
-      vy: Math.random()*2+1,
-      vx: (Math.random()-.5)*1.2,
-      rot: Math.random()*Math.PI,
-      vr: (Math.random()-.5)*0.2
-    }));
-    function confettiStep(){
-      ctx.clearRect(0,0,W,H);
-      pieces.forEach(p=>{
-        p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr;
-        if(p.y>H+20){ p.y = -20; p.x = Math.random()*W; }
-        ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
-        ctx.fillStyle = `hsl(${(p.y/3)%360},100%,60%)`;
-        ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r);
-        ctx.restore();
-      });
-      requestAnimationFrame(confettiStep);
-    }
-
-    // ===== Audio controls =====
-    const audio = document.getElementById('bgm');
-    const playBtn = document.getElementById('playBtn');
-    const muteBtn = document.getElementById('muteBtn');
-
-    // Set your song file here (local or URL):
-    // Example: audio.src = 'https://youtu.be/maEVfpxDB8k?si=HQOeSIlHQf1iV3qk';
-
-    let started = false;
-    playBtn.addEventListener('click', async ()=>{
-      try{
-        if(!audio.src){
-          alert('Belum ada file lagu. Edit kode dan isi src audio dengan file kamu ya.');
-          return;
-        }
-        if(audio.paused){ await audio.play(); playBtn.textContent='⏸️ Jeda'; if(!started){ started=true; confettiStep(); } }
-        else{ audio.pause(); playBtn.textContent='▶️ Putar Lagu'; }
-      }catch(err){ console.log(err); alert('Browser menolak autoplay. Coba klik lagi setelah interaksi.'); }
-    });
-
-    muteBtn.addEventListener('click', ()=>{
-      audio.muted = !audio.muted; muteBtn.setAttribute('aria-pressed', audio.muted);
-      muteBtn.textContent = audio.muted ? '🔊 Unmute' : '🔇 Mute';
-    });
-
-    // Loop music gently
-    audio.addEventListener('ended', ()=>{ audio.currentTime = 0; audio.play().catch(()=>{}); });
-
-    // ===== Share (optional) =====
-    if(navigator.share){
-      const shareBtn = document.createElement('button');
-      shareBtn.className='btn secondary'; shareBtn.textContent='🔗 Bagikan';
-      shareBtn.addEventListener('click', ()=>{
-        navigator.share({ title:'Birthday Album', text:'Lihat album ulang tahun untuk adikku', url: location.href });
-      });
-      document.querySelector('.controls').appendChild(shareBtn);
-    }
-  </script>
 </body>
 </html>
